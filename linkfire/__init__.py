@@ -6,5 +6,5 @@ __author__ = "Lorenzo Setale ( http://who.is.koalalorenzo.com/? )"
 __author_email__ = "koalalorenzo@gmail.com"
 __copyright__ = "Copyright (c) 2013, 2014 Lorenzo Setale"
 
-from .Base import Base
+from .Base import ApiMethod
 from .Link import Link
