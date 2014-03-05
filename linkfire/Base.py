@@ -3,25 +3,39 @@ import hashlib
 
 class ApiMethod(object):
     """Basic API Class to handle API requests"""
+
+    email = ""
+    password = ""
+    host = None
+    
+    token = None
+    user_id = None
+    domain_id = ""
+    team_id = ""
+    
     def __init__(self, api_version="1.0", host=None):
-        super(ApiMethod, self).__init__()
-        
+        super(ApiMethod, self).__init__()        
         if not host:
             host = "http://linkfire.com/api/%s" % api_version
-
-        self.email = ""
-        self.password = ""
-        
-        self.token = None
-        self.user_id = None
-
         self.host = host
         
     def call_api(endpoint, params,):
-        """ Call the API """
+        """ Call an API endpoint with auth credentials """
         payload = dict()
-        if self.token and self.user_id:
-            payload.update({'token': self.token, 'user_id': self.user_id})
+
+        # Credentials:
+        if self.token:
+            payload.update({'token': self.token})
+
+        if self.user_id:
+            payload.update({'user_id': self.user_id})
+
+        if self.domain_id:
+            payload.update({'domain_id': self.domain_id})
+
+        if self.team_id:
+            payload.update({'team_id': self.team_id})
+
         payload.update(params)
 
         call_url = '{host}/{method}'.format(host=self.host, method=endpoint)
@@ -46,7 +60,7 @@ class ApiMethod(object):
             hashed_password = password
 
         payload = {"email": email, "password": hashed_password}
-        data = self.call_api( "/auth/login", payload )
+        data = self.call_api( "auth/login", payload )
 
         self.token = data['token']
         self.user_id = data['user']['id']
