@@ -19,7 +19,7 @@ class ApiMethod(object):
             host = "http://linkfire.com/api/%s" % api_version
         self.host = host
         
-    def call_api(endpoint, params,):
+    def call_api(self, endpoint, params):
         """ Call an API endpoint with auth credentials """
         payload = dict()
 
@@ -49,7 +49,7 @@ class ApiMethod(object):
    
         return data
 
-    def authenticate(username, password, already_hashed_password=False):
+    def authenticate(self, email, password, already_hashed_password=False):
         """
             This method with get from email and password the token and the 
             user_id.
