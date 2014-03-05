@@ -45,7 +45,7 @@ class ApiMethod(object):
 
         self.call_response = data
         if data.has_key("errors"):
-            raise Exception( "\n --- \n".join(data['errors']) ) 
+            raise Exception( data['errors'] ) 
    
         return data
 
