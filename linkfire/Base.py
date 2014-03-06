@@ -13,6 +13,8 @@ class ApiMethod(object):
     domain_id = ""
     team_id = ""
     
+    call_response = None
+
     def __init__(self, api_version="1.0", host=None):
         super(ApiMethod, self).__init__()        
         if not host:
@@ -40,10 +42,10 @@ class ApiMethod(object):
 
         call_url = '{host}/{method}'.format(host=self.host, method=endpoint)
 
-        r = requests.get(call_url, params=payload)
+        r = requests.post(call_url, data=payload)
         data = r.json()
 
-        self.call_response = data
+        self.call_response = r
         if data.has_key("errors"):
             raise Exception( data['errors'] ) 
    
