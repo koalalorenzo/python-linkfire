@@ -21,7 +21,7 @@ class ApiMethod(object):
             host = "http://linkfire.com/api/%s" % api_version
         self.host = host
         
-    def call_api(self, endpoint, params):
+    def call_api(self, endpoint, params, method="get"):
         """ Call an API endpoint with auth credentials """
         payload = dict()
 
@@ -42,10 +42,9 @@ class ApiMethod(object):
 
         call_url = '{host}/{method}'.format(host=self.host, method=endpoint)
 
-        r = requests.post(call_url, data=payload)
-        data = r.json()
+        self.call_response = requests.request(method, call_url, data=payload)
 
-        self.call_response = r
+        data = self.call_response.json()
         if data.has_key("errors"):
             raise Exception( data['errors'] ) 
    
@@ -62,7 +61,7 @@ class ApiMethod(object):
             hashed_password = password
 
         payload = {"email": email, "password": hashed_password}
-        data = self.call_api( "auth/login", payload )
+        data = self.call_api( "auth/login", payload, method="post" )
 
         self.token = data['token']
         self.user_id = data['user']['id']
