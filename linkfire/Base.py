@@ -47,6 +47,8 @@ class ApiMethod(object):
         data = self.call_response.json()
         if data.has_key("errors"):
             raise Exception( data['errors'] ) 
+        elif data.has_key("error"):
+            raise Exception( data['error'] ) 
    
         return data
 
