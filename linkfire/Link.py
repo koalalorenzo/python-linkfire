@@ -25,7 +25,7 @@ class Link(ApiMethod):
             "title": self.title,
             "description": self.description,
         }
-        data = self.call_api("links/token", payload)
+        data = self.call_api("links/create", payload, method="post")
 
         self.shortlink = data['link']['url']
         self.original_url = data['link']['original_url']
