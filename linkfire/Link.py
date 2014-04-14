@@ -1,8 +1,9 @@
 from .Base import ApiMethod
 
+
 class Link(ApiMethod):
     """Link class to make a new shortlink"""
-    
+
     original_url = ""
     shortlink = None
 

@@ -12,7 +12,7 @@ if os.path.isfile("README.md"):
         long_description = file.read()
 
 setup(name='python-linkfire',
-      version='0.1',
+      version='0.2',
       description='Python linkfire.com API',
       author='Lorenzo Setale ( http://who.is.lorenzo.setale.me/? )',
       author_email='koalalorenzo@gmail.com',
